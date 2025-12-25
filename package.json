@@ -5,18 +5,23 @@
   "scripts": {
     "dev": "vite dev --port 3000",
     "build": "vite build",
-    "preview": "vite preview",
+    "vite:preview": "vite preview",
     "test": "vitest run",
     "format": "biome format",
     "lint": "biome lint",
     "check": "biome check",
+    "deploy": "bun run build && wrangler deploy",
+    "build:preview": "bun run build && vite preview",
+    "cf-typegen": "wrangler types",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
     "@base-ui/react": "^1.0.0",
+    "@cloudflare/vite-plugin": "^1.19.0",
     "@fontsource-variable/inter": "^5.2.8",
+    "@react-email/components": "^1.0.2",
     "@t3-oss/env-core": "^0.13.10",
     "@tailwindcss/vite": "^4.0.6",
     "@tanstack/react-devtools": "^0.7.0",
@@ -28,6 +33,7 @@
     "@tanstack/react-start": "^1.132.0",
     "@tanstack/router-plugin": "^1.132.0",
     "@unpic/react": "^1.0.2",
+    "@upstash/workflow": "^0.2.23",
     "@zxcvbn-ts/core": "^3.0.4",
     "@zxcvbn-ts/language-common": "^3.0.4",
     "@zxcvbn-ts/language-en": "^3.0.2",
@@ -48,6 +54,7 @@
     "react-dom": "^19.2.0",
     "react-resizable-panels": "^3.0.6",
     "recharts": "2.15.4",
+    "resend": "^6.6.0",
     "shadcn": "^3.6.1",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.4.0",
@@ -73,8 +80,5 @@
     "vite": "^7.1.7",
     "vitest": "^3.0.5",
     "web-vitals": "^5.1.0"
-  },
-  "overrides": {
-    "vite": "8.0.0-beta.0"
   }
 }

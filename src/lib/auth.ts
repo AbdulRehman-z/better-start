@@ -1,17 +1,51 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { lastLoginMethod } from "better-auth/plugins";
+import { tanstackStartCookies } from "better-auth/tanstack-start";
 import { db } from "@/db";
 import * as authSchema from "@/db/schemas/auth-schema";
 import { env } from "@/env";
+import {
+	sendPasswordResetEmailTrigger,
+	sendVerificationEmailTrigger,
+} from "./triggers";
+
+const isTargetRoute = (url: string) => {
+	return url.endsWith("/sign-in/email") || url.endsWith("/sign-up/email");
+};
 
 export const auth = betterAuth({
 	database: drizzleAdapter(db, {
-		schema: authSchema,
 		provider: "pg",
+		schema: authSchema,
 	}),
 	emailAndPassword: {
 		enabled: true,
-		autoSignIn: true,
+		autoSignIn: false,
+		requireEmailVerification: true,
+		sendResetPassword: async ({ user, url }) => {
+			void sendPasswordResetEmailTrigger(
+				{ email: user.email, name: user.name },
+				url,
+			);
+		},
+		onPasswordReset: async ({ user }) => {
+			console.log(`Password reset for user ${user.id}`);
+		},
+	},
+	emailVerification: {
+		afterEmailVerification: async (user) => {
+			console.log(`Email verified for user ${user.id}`);
+		},
+		autoSignInAfterVerification: true,
+		sendOnSignIn: true,
+		sendOnSignUp: true,
+		sendVerificationEmail: async ({ url, user }) => {
+			void sendVerificationEmailTrigger(
+				{ email: user.email, name: user.name },
+				url,
+			);
+		},
 	},
 	session: {
 		cookieCache: {
@@ -19,9 +53,15 @@ export const auth = betterAuth({
 		},
 	},
 	rateLimit: {
+		enabled: true,
 		storage: "database",
-		maxAttempts: 1000,
-		timeWindow: 60 * 60 * 1000, // 1 hour
+		customRules: {
+			"/get-session": false,
+			"/sign-in/email": {
+				max: 2,
+				window: 60, // 1 minute
+			},
+		},
 	},
 	socialProviders: {
 		github: {
@@ -33,4 +73,8 @@ export const auth = betterAuth({
 			clientSecret: env.GOOGLE_SECRET,
 		},
 	},
+	experimental: {
+		joins: true,
+	},
+	plugins: [tanstackStartCookies(), lastLoginMethod()],
 });

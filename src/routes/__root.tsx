@@ -6,6 +6,8 @@ import {
 	Scripts,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
+import { ThemeProvider } from "next-themes";
+import NotFound from "@/components/custom/404-not-found";
 import { Toaster } from "@/components/ui/sonner";
 import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
 import appCss from "../styles.css?url";
@@ -25,7 +27,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 				content: "width=device-width, initial-scale=1",
 			},
 			{
-				title: "TanStack Start Starter",
+				title: "",
 			},
 		],
 		links: [
@@ -35,7 +37,8 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 			},
 		],
 	}),
-	notFoundComponent: () => <div>Not Found</div>,
+	errorComponent: () => <div>Error</div>,
+	notFoundComponent: () => <NotFound />,
 	shellComponent: RootDocument,
 });
 
@@ -46,7 +49,15 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body>
-				{children}
+				<ThemeProvider
+					attribute="class"
+					themes={["dark"]}
+					defaultTheme="dark"
+					enableColorScheme
+					enableSystem
+				>
+					{children}
+				</ThemeProvider>
 				<Toaster />
 				<TanStackDevtools
 					config={{

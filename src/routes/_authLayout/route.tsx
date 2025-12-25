@@ -1,8 +1,12 @@
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import { GalleryVerticalEnd } from "lucide-react";
+import { guestOnlyMiddleware } from "@/lib/middlewares";
 
 export const Route = createFileRoute("/_authLayout")({
 	component: RouteComponent,
+	server: {
+		// middleware: [guestOnlyMiddleware],
+	},
 });
 
 function RouteComponent() {
@@ -26,9 +30,10 @@ function RouteComponent() {
 			<div className="bg-primary/5 relative p-10 hidden lg:block">
 				<div className="absolute bottom-5">
 					<blockquote className="leading-normal text-balance text-primary">
-						&ldquo;The way this product streamline the whole process from
-						fetching the gig's in realtime like they are synced with each other
-						to the prompt generation is truly unbelieveable.&rdquo; -{" "}
+						&ldquo;This platform has been a game-changer for our team.
+						Everything is so intuitive and well-designed, making our daily tasks
+						much more efficient.&rdquo;
+						<br />
 						<span className="font-semibold ">Sofia Davis</span>
 					</blockquote>
 				</div>

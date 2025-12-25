@@ -1,0 +1,1 @@
+ALTER TABLE "rate_limit" RENAME TO "rateLimit";
