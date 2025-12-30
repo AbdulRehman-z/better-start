@@ -25,13 +25,13 @@ export const requireAuthMiddleware = createMiddleware().server(
  * Redirects authenticated users to home page.
  * Use on login/signup pages to prevent authenticated users from accessing them.
  */
-export const guestOnlyMiddleware = createMiddleware().server(
+export const requireNoAuthMiddleware = createMiddleware().server(
 	async ({ next }) => {
 		const headers = getRequestHeaders();
 		const session = await auth.api.getSession({ headers });
 
 		if (session) {
-			throw redirect({ to: "/" });
+			throw redirect({ to: "/account" });
 		}
 
 		return await next();

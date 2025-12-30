@@ -81,7 +81,7 @@ export const verification = pgTable(
 	(table) => [index("verification_identifier_idx").on(table.identifier)],
 );
 
-export const rateLimit = pgTable("rate_Limit", {
+export const rateLimit = pgTable("rate_limit", {
 	id: text("id").primaryKey(),
 	key: text("key"),
 	count: integer("count"),

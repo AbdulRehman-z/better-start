@@ -19,5 +19,7 @@ export const sendEmail = async ({
 		html: typeof html === "function" ? html() : html,
 	});
 
-	console.error(error);
+	if (error) {
+		throw new Error(error.message);
+	}
 };

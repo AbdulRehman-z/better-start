@@ -1,4 +1,12 @@
-export const verifyEmailTemplate = (email: string, url: string) => {
+type Input = {
+	user: {
+		email: string;
+		name: string;
+	};
+	url: string;
+};
+
+export const verifyEmailTemplate = ({ user, url }: Input) => {
 	return `
   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
   <html dir="ltr" lang="en">
@@ -65,7 +73,7 @@ export const verifyEmailTemplate = (email: string, url: string) => {
                     <td>
                       <p
                         style="font-size:16px;color:rgb(31,41,55);line-height:24px;margin:0px;margin-bottom:16px;margin-top:0px;margin-left:0px;margin-right:0px">
-                        Hi there,
+                        Hi there, ${user.name}
                       </p>
                       <p
                         style="font-size:16px;color:rgb(31,41,55);line-height:24px;margin:0px;margin-bottom:16px;margin-top:0px;margin-left:0px;margin-right:0px">
@@ -74,7 +82,7 @@ export const verifyEmailTemplate = (email: string, url: string) => {
                       </p>
                       <p
                         style="font-size:14px;color:rgb(75,85,99);margin:0px;margin-bottom:24px;line-height:24px;margin-top:0px;margin-left:0px;margin-right:0px">
-                        Email: <strong>${email}</strong>
+                        Email: <strong>${user.email}</strong>
                       </p>
                     </td>
                   </tr>

@@ -58,7 +58,7 @@ export const auth = betterAuth({
 		customRules: {
 			"/get-session": false,
 			"/sign-in/email": {
-				max: 2,
+				max: 200,
 				window: 60, // 1 minute
 			},
 		},
@@ -71,8 +71,17 @@ export const auth = betterAuth({
 		google: {
 			clientId: env.VITE_GOOGLE_CLIENT_ID,
 			clientSecret: env.GOOGLE_SECRET,
+			scope: ["profile", "email"],
+			mapProfileToUser: async (profile) => {
+				console.log({ profile });
+				return {
+					name: "dawd9921e821geaoisv",
+					image: profile.picture,
+				};
+			},
 		},
 	},
+	user: {},
 	experimental: {
 		joins: true,
 	},

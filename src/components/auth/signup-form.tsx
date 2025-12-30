@@ -60,10 +60,8 @@ export const SignupForm = () => {
 								"Please check your mail and click the link to verify your email address.",
 						});
 					},
-					onError: () => {
-						toast.error("Signup failed!", {
-							description: "Please try again.",
-						});
+					onError: (ctx) => {
+						toast.error(ctx.error.message || "An unknown error occurred");
 					},
 				},
 			);
@@ -71,14 +69,14 @@ export const SignupForm = () => {
 	});
 
 	// Combined loading state: form submitting OR social auth in progress
-	const isLoading = form.state.isSubmitting || socialAuthPending;
+	const isSubmitting = form.state.isSubmitting || socialAuthPending;
 
 	return (
 		<FormWrapper>
 			{showVerificationComponent ? (
 				<EmailVerification email={form.getFieldValue("email")} />
 			) : (
-				<Card className="gap-y-10">
+				<Card className="gap-y-7">
 					<CardHeader className="text-center">
 						<CardTitle className="text-xl">Create your account</CardTitle>
 						<CardDescription>
@@ -105,7 +103,7 @@ export const SignupForm = () => {
 											<Field data-invalid={isInvalid}>
 												<FieldLabel htmlFor={field.name}>Full Name</FieldLabel>
 												<Input
-													disabled={isLoading}
+													disabled={isSubmitting}
 													id={field.name}
 													name={field.name}
 													type="text"
@@ -133,7 +131,7 @@ export const SignupForm = () => {
 											<Field data-invalid={isInvalid}>
 												<FieldLabel htmlFor={field.name}>Email</FieldLabel>
 												<Input
-													disabled={isLoading}
+													disabled={isSubmitting}
 													id={field.name}
 													name={field.name}
 													type="email"
@@ -164,7 +162,7 @@ export const SignupForm = () => {
 											<Field data-invalid={isInvalid}>
 												<FieldLabel htmlFor={field.name}>Password</FieldLabel>
 												<PasswordInput
-													disabled={isLoading}
+													disabled={isSubmitting}
 													id={field.name}
 													name={field.name}
 													value={field.state.value}
@@ -195,7 +193,7 @@ export const SignupForm = () => {
 													Confirm Password
 												</FieldLabel>
 												<PasswordInput
-													disabled={isLoading}
+													disabled={isSubmitting}
 													id={field.name}
 													name={field.name}
 													value={field.state.value}
@@ -212,7 +210,11 @@ export const SignupForm = () => {
 								/>
 
 								<Field>
-									<Button type="submit" className="w-full" disabled={isLoading}>
+									<Button
+										type="submit"
+										className="w-full"
+										disabled={isSubmitting}
+									>
 										{form.state.isSubmitting ? (
 											<>
 												<Loader2 className="size-4 animate-spin" />
@@ -228,8 +230,8 @@ export const SignupForm = () => {
 
 								<Field>
 									<SocialAuthButtons
-										disabled={isLoading}
-										callbackURL="/"
+										disabled={isSubmitting}
+										callbackURL="/account"
 										onAuthStart={() => setSocialAuthPending(true)}
 									/>
 

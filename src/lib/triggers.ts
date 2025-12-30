@@ -10,7 +10,8 @@ export const sendVerificationEmailTrigger = async (
 			user: { email: user.email, name: user.name },
 			url,
 		}),
-		retries: 3,
+		retries: 2,
+		retryDelay: "(1 + retried) * 1000",
 		keepTriggerConfig: true,
 	});
 };
@@ -25,7 +26,8 @@ export const sendPasswordResetEmailTrigger = async (
 			user: { email: user.email, name: user.name },
 			url,
 		}),
-		retries: 3,
+		retryDelay: "(1 + retried) * 1000",
+		retries: 2,
 		keepTriggerConfig: true,
 	});
 };

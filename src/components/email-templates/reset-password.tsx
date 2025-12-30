@@ -1,134 +1,205 @@
-import {
-	Body,
-	Button,
-	Container,
-	Head,
-	Heading,
-	Html,
-	Link,
-	Preview,
-	Section,
-	Tailwind,
-	Text,
-} from "@react-email/components";
-
-type Props = {
-	userEmail: string;
-	resetLink: string;
+type Input = {
+	user: {
+		email: string;
+		name: string;
+	};
+	url: string;
 };
 
-const PasswordResetEmail = ({ userEmail, resetLink }: Props) => {
-	return (
-		<Html lang="en" dir="ltr">
-			<Tailwind>
-				<Head />
-				<Preview>Reset your password - Action required</Preview>
-				<Body className="font-sans py-10">
-					<Container className="rounded-lg shadow-lg max-w-2xl mx-auto p-10">
-						{/* Header */}
-						<Section className="text-center mb-8">
-							<Heading className="text-3xl font-bold m-0 mb-2">
-								Reset Your Password
-							</Heading>
-							<Text className="text-base m-0">
-								We received a request to reset your password
-							</Text>
-						</Section>
-
-						{/* Main Content */}
-						<Section className="mb-8">
-							<Text className="text-base mb-5 m-0">Hello,</Text>
-							<Text className="text-base mb-5 m-0">
-								We received a request to reset the password for your account{" "}
-								<strong>{userEmail}</strong>.
-							</Text>
-							<Text className="text-base mb-7 m-0">
-								Click the button below to create a new password:
-							</Text>
-
-							{/* Reset Button */}
-							<div className="text-center my-7">
-								<Button
-									href={resetLink}
-									className="px-10 py-4 rounded-lg text-base font-semibold no-underline box-border"
-								>
-									Reset My Password
-								</Button>
-							</div>
-
-							<Text className="text-base mb-4 m-0">
-								If the button doesn't work, copy and paste this link into your
-								browser:
-							</Text>
-							<Text className="text-sm mb-8 m-0 break-all p-3 rounded">
-								<Link href={resetLink} className="no-underline">
-									{resetLink}
-								</Link>
-							</Text>
-						</Section>
-
-						{/* Expiration Warning */}
-						<Section className=" border-l-4 p-5 mb-8 rounded-r">
-							<Text className="text-sm m-0 font-semibold mb-2">
-								⏰ Important: Link expires in 1 hour
-							</Text>
-							<Text className="text-sm m-0">
-								This password reset link will expire 1 hour from the time this
-								email was sent. Please reset your password promptly to avoid
-								having to request a new link.
-							</Text>
-						</Section>
-
-						{/* Security Notice */}
-						<Section className="border-l-4 p-5 mb-8 rounded-r">
-							<Text className="text-sm m-0 font-semibold mb-2">
-								🔒 Security Information
-							</Text>
-							<Text className="text-sm mb-2 m-0">
-								• If you didn't request this password reset, please ignore this
-								email
-							</Text>
-							<Text className="text-sm mb-2 m-0">
-								• Your current password will remain active until you create a
-								new one
-							</Text>
-							<Text className="text-sm m-0">
-								• This reset link can only be used once for security purposes
-							</Text>
-						</Section>
-
-						{/* Help Section */}
-						<Section className="text-center mb-8">
-							<Text className="text-sm m-0">
-								Need help? Contact our support team at{" "}
-								<Link href="mailto:support@example.com" className="underline">
-									support@example.com
-								</Link>
-							</Text>
-						</Section>
-
-						{/* Footer */}
-						<Section className="border-t pt-6 text-center">
-							<Text className="text-xs m-0 mb-2">
-								123 Business Street, Suite 100, City, State 12345
-							</Text>
-							<Text className="text-xs m-0">
-								© {new Date().getFullYear()} All rights reserved. |{" "}
-								<Link href="#" className="underline">
-									Unsubscribe
-								</Link>
-							</Text>
-						</Section>
-					</Container>
-				</Body>
-			</Tailwind>
-		</Html>
-	);
+export const resetPasswordTemplate = ({ user, url }: Input) => {
+	return `
+		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+		<html dir="ltr" lang="en">
+				<head>
+						<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+						<meta name="x-apple-disable-message-reformatting" />
+				</head>
+				<body
+						style='background-color:rgb(243,244,246);font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";padding-top:40px;padding-bottom:40px'>
+						<!--$-->
+						<div
+								style="display:none;overflow:hidden;line-height:1px;opacity:0;max-height:0;max-width:0"
+								data-skip-in-text="true">
+								Reset your password for your Flowcat account
+								<div>
+												‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿ ‌​‍‎‏﻿
+								</div>
+						</div>
+						<table
+								align="center"
+								width="100%"
+								border="0"
+								cellpadding="0"
+								cellspacing="0"
+								role="presentation"
+								style="background-color:rgb(255,255,255);border-radius:8px;box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), 0 0 #0000;max-width:600px;margin-left:auto;margin-right:auto;padding:40px">
+								<tbody>
+										<tr style="width:100%">
+												<td>
+														<table
+																align="center"
+																width="100%"
+																border="0"
+																cellpadding="0"
+																cellspacing="0"
+																role="presentation"
+																style="text-align:center;margin-bottom:32px">
+																<tbody>
+																		<tr>
+																				<td>
+																						<h1
+																								style="font-size:28px;font-weight:700;color:rgb(17,24,39);margin:0px;margin-bottom:8px">
+																								Reset Your Password
+																						</h1>
+																						<p
+																								style="font-size:16px;color:rgb(75,85,99);margin:0px;line-height:24px;margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px">
+																								We received a request to reset the password for your account
+																						</p>
+																				</td>
+																		</tr>
+																</tbody>
+														</table>
+														<table
+																align="center"
+																width="100%"
+																border="0"
+																cellpadding="0"
+																cellspacing="0"
+																role="presentation"
+																style="margin-bottom:32px">
+																<tbody>
+																		<tr>
+																				<td>
+																						<p
+																								style="font-size:16px;color:rgb(31,41,55);line-height:24px;margin:0px;margin-bottom:16px;margin-top:0px;margin-left:0px;margin-right:0px">
+																								Hi there, ${user.name}
+																						</p>
+																						<p
+																								style="font-size:16px;color:rgb(31,41,55);line-height:24px;margin:0px;margin-bottom:16px;margin-top:0px;margin-left:0px;margin-right:0px">
+																								You recently requested to reset your password. To set a new password,
+																								please click the button below:
+																						</p>
+																						<p
+																								style="font-size:14px;color:rgb(75,85,99);margin:0px;margin-bottom:24px;line-height:24px;margin-top:0px;margin-left:0px;margin-right:0px">
+																								Account: <strong>${user.email}</strong>
+																						</p>
+																				</td>
+																		</tr>
+																</tbody>
+														</table>
+														<table
+																align="center"
+																width="100%"
+																border="0"
+																cellpadding="0"
+																cellspacing="0"
+																role="presentation"
+																style="text-align:center;margin-bottom:32px">
+																<tbody>
+																		<tr>
+																				<td>
+																						<a
+																								href=${url}
+																								style="background-color:rgb(37,99,235);color:rgb(255,255,255);padding-left:32px;padding-right:32px;padding-top:16px;padding-bottom:16px;border-radius:8px;font-size:16px;font-weight:600;text-decoration-line:none;box-sizing:border-box;line-height:100%;text-decoration:none;display:inline-block;max-width:100%;mso-padding-alt:0px"
+																								target="_blank"
+																								><span
+																										><!--[if mso]><i style="mso-font-width:400%;mso-text-raise:24" hidden>&#8202;&#8202;&#8202;&#8202;</i><![endif]--></span
+																								><span
+																										style="max-width:100%;display:inline-block;line-height:120%;mso-padding-alt:0px;mso-text-raise:12px"
+																										>Reset Password</span
+																								><span
+																										><!--[if mso]><i style="mso-font-width:400%" hidden>&#8202;&#8202;&#8202;&#8202;&#8203;</i><![endif]--></span
+																								></a
+																						>
+																				</td>
+																		</tr>
+																</tbody>
+														</table>
+														<table
+																align="center"
+																width="100%"
+																border="0"
+																cellpadding="0"
+																cellspacing="0"
+																role="presentation"
+																style="margin-bottom:32px">
+																<tbody>
+																		<tr>
+																				<td>
+																						<p
+																								style="font-size:14px;color:rgb(75,85,99);line-height:20px;margin:0px;margin-bottom:8px;margin-top:0px;margin-left:0px;margin-right:0px">
+																								If the button above doesn&#x27;t work, you can copy and
+																								paste this link into your browser:
+																						</p>
+																						<a
+																								href=${url}
+																								style="color:rgb(37,99,235);font-size:14px;word-break:break-all;text-decoration-line:none"
+																								target="_blank"
+																								>${url}</a
+																						>
+																				</td>
+																		</tr>
+																</tbody>
+														</table>
+														<table
+																align="center"
+																width="100%"
+																border="0"
+																cellpadding="0"
+																cellspacing="0"
+																role="presentation"
+																style="background-color:rgb(249,250,251);padding:20px;border-radius:8px;margin-bottom:32px">
+																<tbody>
+																		<tr>
+																				<td>
+																						<p
+																								style="font-size:14px;color:rgb(55,65,81);margin:0px;margin-bottom:8px;line-height:24px;margin-top:0px;margin-left:0px;margin-right:0px">
+																								<strong>Security Note:</strong>
+																						</p>
+																						<p
+																								style="font-size:14px;color:rgb(75,85,99);line-height:20px;margin:0px;margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px">
+																								This password reset link will expire in 24 hours. If you
+																								didn&#x27;t request a password reset, you can safely ignore this
+																								email.
+																						</p>
+																				</td>
+																		</tr>
+																</tbody>
+														</table>
+														<table
+																align="center"
+																width="100%"
+																border="0"
+																cellpadding="0"
+																cellspacing="0"
+																role="presentation"
+																style="border-top-width:1px;border-color:rgb(229,231,235);padding-top:24px">
+																<tbody>
+																		<tr>
+																				<td>
+																						<p
+																								style="font-size:12px;color:rgb(107,114,128);line-height:16px;margin:0px;margin-bottom:8px;margin-top:0px;margin-left:0px;margin-right:0px">
+																								Best regards,<br />The Support Team
+																						</p>
+																						<p
+																								style="font-size:12px;color:rgb(156,163,175);margin:0px;margin-bottom:8px;line-height:24px;margin-top:0px;margin-left:0px;margin-right:0px">
+																								University Road, Office 100<br />Peshawar, Khyber Pakhtunkhwa<br />Pakistan
+																						</p>
+																						<p
+																								style="font-size:12px;color:rgb(156,163,175);margin:0px;line-height:24px;margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px">
+																								©
+																								Flowcat. All rights reserved. |<!-- -->
+																						</p>
+																				</td>
+																		</tr>
+																</tbody>
+														</table>
+												</td>
+										</tr>
+								</tbody>
+						</table>
+						<!--7--><!--/$-->
+				</body>
+		</html>
+		`;
 };
-
-// PasswordResetEmail.PreviewProps = {
-//   userEmail: "yousafbhaikhan10@gmail.com",
-//   resetLink: "https://yourapp.com/reset-password?token=abc123xyz789",
-// };
-
-export default PasswordResetEmail;

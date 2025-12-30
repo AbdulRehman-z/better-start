@@ -13,14 +13,14 @@ type Input = {
 
 export const Route = createFileRoute("/api/send-verification-email")({
 	server: {
-		handlers: serve<Input>(async (context) => {
-			const input = context.requestPayload;
+		handlers: serve<Input>(async (ctx) => {
+			const input = ctx.requestPayload;
 
-			await context.run("send-verification-email", async () => {
+			await ctx.run("send-verification-email", async () => {
 				await sendEmail({
 					email: input.user.email,
-					subject: "Verify your email",
-					html: () => verifyEmailTemplate(input.user.email, input.url),
+					subject: `Verify your email ${input.user.name}`,
+					html: () => verifyEmailTemplate({ user: input.user, url: input.url }),
 				});
 			});
 		}),

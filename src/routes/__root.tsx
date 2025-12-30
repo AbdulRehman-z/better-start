@@ -51,8 +51,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 			<body>
 				<ThemeProvider
 					attribute="class"
-					themes={["dark"]}
-					defaultTheme="dark"
+					themes={["light"]}
+					defaultTheme="light"
 					enableColorScheme
 					enableSystem
 				>

@@ -3,7 +3,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
 	Card,
 	CardContent,
@@ -51,13 +51,16 @@ export const LoginForm = () => {
 				},
 				{
 					onSuccess: () => {
-						navigate({ to: "/" });
+						navigate({ to: "/account" });
 					},
 					onError: (ctx) => {
 						if (ctx.error.code === "EMAIL_NOT_VERIFIED") {
 							toast.error("Email not verified");
 							setShowVerificationComponent(true);
+							return;
 						}
+
+						toast.error(ctx.error.message || "An unknown error occurred");
 					},
 				},
 			);
@@ -65,14 +68,14 @@ export const LoginForm = () => {
 	});
 
 	// Combined loading state: form submitting OR social auth in progress
-	const isLoading = form.state.isSubmitting || socialAuthPending;
+	const isSubmitting = form.state.isSubmitting || socialAuthPending;
 
 	return (
 		<FormWrapper>
 			{showVerificationComponent ? (
 				<EmailVerification email={form.getFieldValue("email")} />
 			) : (
-				<Card className="gap-y-10">
+				<Card className="gap-y-5">
 					<CardHeader className="text-center">
 						<CardTitle className="text-xl">Login to your account</CardTitle>
 						<CardDescription>
@@ -99,7 +102,7 @@ export const LoginForm = () => {
 											<Field data-invalid={isInvalid}>
 												<FieldLabel htmlFor={field.name}>Email</FieldLabel>
 												<Input
-													disabled={isLoading}
+													disabled={isSubmitting}
 													id={field.name}
 													name={field.name}
 													type="email"
@@ -124,10 +127,23 @@ export const LoginForm = () => {
 											errors.length > 0 && field.state.meta.isTouched;
 
 										return (
-											<Field data-invalid={isInvalid}>
-												<FieldLabel htmlFor={field.name}>Password</FieldLabel>
+											<Field className="relative" data-invalid={isInvalid}>
+												<div className="flex items-center">
+													<FieldLabel htmlFor={field.name}>Password</FieldLabel>
+													<Link
+														disabled={isSubmitting}
+														className={buttonVariants({
+															className:
+																"underline ml-auto text-secondary-foreground hover:text-primary",
+															variant: "link",
+														})}
+														to="/forgot-password"
+													>
+														Forgot password?
+													</Link>
+												</div>
 												<PasswordInput
-													disabled={isLoading}
+													disabled={isSubmitting}
 													id={field.name}
 													name={field.name}
 													value={field.state.value}
@@ -145,14 +161,15 @@ export const LoginForm = () => {
 
 								<Field>
 									<Button
-										disabled={isLoading}
+										variant="default"
+										disabled={isSubmitting}
 										type="submit"
 										className="w-full relative"
 									>
 										{form.state.isSubmitting ? (
 											<>
 												<Loader2 className="size-4 animate-spin" />
-												Signing in...
+												Logging in...
 											</>
 										) : (
 											"Login"
@@ -160,7 +177,7 @@ export const LoginForm = () => {
 										{lastLoginMethod === "email" && (
 											<Badge
 												variant="secondary"
-												className="absolute right-0.5 top-2/12 -translate-y-1/2"
+												className="absolute -right-0.5 top-2/12 -translate-y-1/2 text-[9px] text-muted-foreground"
 											>
 												Last Used
 											</Badge>
@@ -173,13 +190,14 @@ export const LoginForm = () => {
 								<Field>
 									<SocialAuthButtons
 										lastLoginMethod={lastLoginMethod}
-										disabled={isLoading}
-										callbackURL="/"
+										disabled={isSubmitting}
+										callbackURL="/account"
 										onAuthStart={() => setSocialAuthPending(true)}
 									/>
 									<FieldDescription className="text-center mt-4">
 										Don&apos;t have an account?{" "}
 										<Link
+											disabled={isSubmitting}
 											to="/sign-up"
 											className="underline underline-offset-4 font-semibold"
 										>

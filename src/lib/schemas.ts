@@ -44,11 +44,18 @@ export const resetPasswordSchema = z
 		path: ["confirmPassword"],
 	});
 
-// ============================================================================
-// Type Exports - Inferred types from schemas
-// ============================================================================
+export const updateProfileSchema = z.object({
+	username: z
+		.string({ error: "Username is required" })
+		.min(2, { error: "Username must be at least 2 characters" })
+		.max(100, { error: "Username must be less than 100 characters" }),
+	image: z
+		.url({ error: "Image URL is required" })
+		.max(100, { error: "Image URL must be less than 100 characters" }),
+});
 
 export type LoginFormData = z.infer<typeof loginSchema>;
 export type SignupFormData = z.infer<typeof signupSchema>;
 export type ForgotPasswordFormData = z.infer<typeof forgotPasswordSchema>;
 export type ResetPasswordFormData = z.infer<typeof resetPasswordSchema>;
+export type UpdateProfileFormData = z.infer<typeof updateProfileSchema>;

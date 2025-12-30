@@ -9,24 +9,29 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ProtectedRouteRouteImport } from './routes/_protected/route'
 import { Route as AuthLayoutRouteRouteImport } from './routes/_authLayout/route'
-import { Route as IndexRouteImport } from './routes/index'
 import { Route as TermsIndexRouteImport } from './routes/terms/index'
 import { Route as PrivacyIndexRouteImport } from './routes/privacy/index'
 import { Route as ApiSendVerificationEmailRouteRouteImport } from './routes/api/send-verification-email/route'
 import { Route as ApiSendPasswordResetEmailRouteRouteImport } from './routes/api/send-password-reset-email/route'
+import { Route as ProtectedSessionsIndexRouteImport } from './routes/_protected/sessions/index'
+import { Route as ProtectedSecurityIndexRouteImport } from './routes/_protected/security/index'
+import { Route as ProtectedDangerIndexRouteImport } from './routes/_protected/danger/index'
+import { Route as ProtectedAccountsIndexRouteImport } from './routes/_protected/accounts/index'
+import { Route as ProtectedAccountIndexRouteImport } from './routes/_protected/account/index'
 import { Route as AuthLayoutSignUpIndexRouteImport } from './routes/_authLayout/sign-up/index'
+import { Route as AuthLayoutResetPasswordIndexRouteImport } from './routes/_authLayout/reset-password/index'
 import { Route as AuthLayoutLoginIndexRouteImport } from './routes/_authLayout/login/index'
 import { Route as AuthLayoutForgotPasswordIndexRouteImport } from './routes/_authLayout/forgot-password/index'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
-const AuthLayoutRouteRoute = AuthLayoutRouteRouteImport.update({
-  id: '/_authLayout',
+const ProtectedRouteRoute = ProtectedRouteRouteImport.update({
+  id: '/_protected',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const AuthLayoutRouteRoute = AuthLayoutRouteRouteImport.update({
+  id: '/_authLayout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TermsIndexRoute = TermsIndexRouteImport.update({
@@ -51,11 +56,42 @@ const ApiSendPasswordResetEmailRouteRoute =
     path: '/api/send-password-reset-email',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ProtectedSessionsIndexRoute = ProtectedSessionsIndexRouteImport.update({
+  id: '/sessions/',
+  path: '/sessions/',
+  getParentRoute: () => ProtectedRouteRoute,
+} as any)
+const ProtectedSecurityIndexRoute = ProtectedSecurityIndexRouteImport.update({
+  id: '/security/',
+  path: '/security/',
+  getParentRoute: () => ProtectedRouteRoute,
+} as any)
+const ProtectedDangerIndexRoute = ProtectedDangerIndexRouteImport.update({
+  id: '/danger/',
+  path: '/danger/',
+  getParentRoute: () => ProtectedRouteRoute,
+} as any)
+const ProtectedAccountsIndexRoute = ProtectedAccountsIndexRouteImport.update({
+  id: '/accounts/',
+  path: '/accounts/',
+  getParentRoute: () => ProtectedRouteRoute,
+} as any)
+const ProtectedAccountIndexRoute = ProtectedAccountIndexRouteImport.update({
+  id: '/account/',
+  path: '/account/',
+  getParentRoute: () => ProtectedRouteRoute,
+} as any)
 const AuthLayoutSignUpIndexRoute = AuthLayoutSignUpIndexRouteImport.update({
   id: '/sign-up/',
   path: '/sign-up/',
   getParentRoute: () => AuthLayoutRouteRoute,
 } as any)
+const AuthLayoutResetPasswordIndexRoute =
+  AuthLayoutResetPasswordIndexRouteImport.update({
+    id: '/reset-password/',
+    path: '/reset-password/',
+    getParentRoute: () => AuthLayoutRouteRoute,
+  } as any)
 const AuthLayoutLoginIndexRoute = AuthLayoutLoginIndexRouteImport.update({
   id: '/login/',
   path: '/login/',
@@ -74,7 +110,6 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
   '/api/send-password-reset-email': typeof ApiSendPasswordResetEmailRouteRoute
   '/api/send-verification-email': typeof ApiSendVerificationEmailRouteRoute
   '/privacy': typeof PrivacyIndexRoute
@@ -82,10 +117,15 @@ export interface FileRoutesByFullPath {
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/forgot-password': typeof AuthLayoutForgotPasswordIndexRoute
   '/login': typeof AuthLayoutLoginIndexRoute
+  '/reset-password': typeof AuthLayoutResetPasswordIndexRoute
   '/sign-up': typeof AuthLayoutSignUpIndexRoute
+  '/account': typeof ProtectedAccountIndexRoute
+  '/accounts': typeof ProtectedAccountsIndexRoute
+  '/danger': typeof ProtectedDangerIndexRoute
+  '/security': typeof ProtectedSecurityIndexRoute
+  '/sessions': typeof ProtectedSessionsIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '/api/send-password-reset-email': typeof ApiSendPasswordResetEmailRouteRoute
   '/api/send-verification-email': typeof ApiSendVerificationEmailRouteRoute
   '/privacy': typeof PrivacyIndexRoute
@@ -93,12 +133,18 @@ export interface FileRoutesByTo {
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/forgot-password': typeof AuthLayoutForgotPasswordIndexRoute
   '/login': typeof AuthLayoutLoginIndexRoute
+  '/reset-password': typeof AuthLayoutResetPasswordIndexRoute
   '/sign-up': typeof AuthLayoutSignUpIndexRoute
+  '/account': typeof ProtectedAccountIndexRoute
+  '/accounts': typeof ProtectedAccountsIndexRoute
+  '/danger': typeof ProtectedDangerIndexRoute
+  '/security': typeof ProtectedSecurityIndexRoute
+  '/sessions': typeof ProtectedSessionsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
   '/_authLayout': typeof AuthLayoutRouteRouteWithChildren
+  '/_protected': typeof ProtectedRouteRouteWithChildren
   '/api/send-password-reset-email': typeof ApiSendPasswordResetEmailRouteRoute
   '/api/send-verification-email': typeof ApiSendVerificationEmailRouteRoute
   '/privacy/': typeof PrivacyIndexRoute
@@ -106,12 +152,17 @@ export interface FileRoutesById {
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/_authLayout/forgot-password/': typeof AuthLayoutForgotPasswordIndexRoute
   '/_authLayout/login/': typeof AuthLayoutLoginIndexRoute
+  '/_authLayout/reset-password/': typeof AuthLayoutResetPasswordIndexRoute
   '/_authLayout/sign-up/': typeof AuthLayoutSignUpIndexRoute
+  '/_protected/account/': typeof ProtectedAccountIndexRoute
+  '/_protected/accounts/': typeof ProtectedAccountsIndexRoute
+  '/_protected/danger/': typeof ProtectedDangerIndexRoute
+  '/_protected/security/': typeof ProtectedSecurityIndexRoute
+  '/_protected/sessions/': typeof ProtectedSessionsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
     | '/api/send-password-reset-email'
     | '/api/send-verification-email'
     | '/privacy'
@@ -119,10 +170,15 @@ export interface FileRouteTypes {
     | '/api/auth/$'
     | '/forgot-password'
     | '/login'
+    | '/reset-password'
     | '/sign-up'
+    | '/account'
+    | '/accounts'
+    | '/danger'
+    | '/security'
+    | '/sessions'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
     | '/api/send-password-reset-email'
     | '/api/send-verification-email'
     | '/privacy'
@@ -130,11 +186,17 @@ export interface FileRouteTypes {
     | '/api/auth/$'
     | '/forgot-password'
     | '/login'
+    | '/reset-password'
     | '/sign-up'
+    | '/account'
+    | '/accounts'
+    | '/danger'
+    | '/security'
+    | '/sessions'
   id:
     | '__root__'
-    | '/'
     | '/_authLayout'
+    | '/_protected'
     | '/api/send-password-reset-email'
     | '/api/send-verification-email'
     | '/privacy/'
@@ -142,12 +204,18 @@ export interface FileRouteTypes {
     | '/api/auth/$'
     | '/_authLayout/forgot-password/'
     | '/_authLayout/login/'
+    | '/_authLayout/reset-password/'
     | '/_authLayout/sign-up/'
+    | '/_protected/account/'
+    | '/_protected/accounts/'
+    | '/_protected/danger/'
+    | '/_protected/security/'
+    | '/_protected/sessions/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
   AuthLayoutRouteRoute: typeof AuthLayoutRouteRouteWithChildren
+  ProtectedRouteRoute: typeof ProtectedRouteRouteWithChildren
   ApiSendPasswordResetEmailRouteRoute: typeof ApiSendPasswordResetEmailRouteRoute
   ApiSendVerificationEmailRouteRoute: typeof ApiSendVerificationEmailRouteRoute
   PrivacyIndexRoute: typeof PrivacyIndexRoute
@@ -157,18 +225,18 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_protected': {
+      id: '/_protected'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof ProtectedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authLayout': {
       id: '/_authLayout'
       path: ''
       fullPath: ''
       preLoaderRoute: typeof AuthLayoutRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/terms/': {
@@ -199,11 +267,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiSendPasswordResetEmailRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_protected/sessions/': {
+      id: '/_protected/sessions/'
+      path: '/sessions'
+      fullPath: '/sessions'
+      preLoaderRoute: typeof ProtectedSessionsIndexRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
+    '/_protected/security/': {
+      id: '/_protected/security/'
+      path: '/security'
+      fullPath: '/security'
+      preLoaderRoute: typeof ProtectedSecurityIndexRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
+    '/_protected/danger/': {
+      id: '/_protected/danger/'
+      path: '/danger'
+      fullPath: '/danger'
+      preLoaderRoute: typeof ProtectedDangerIndexRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
+    '/_protected/accounts/': {
+      id: '/_protected/accounts/'
+      path: '/accounts'
+      fullPath: '/accounts'
+      preLoaderRoute: typeof ProtectedAccountsIndexRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
+    '/_protected/account/': {
+      id: '/_protected/account/'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof ProtectedAccountIndexRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
     '/_authLayout/sign-up/': {
       id: '/_authLayout/sign-up/'
       path: '/sign-up'
       fullPath: '/sign-up'
       preLoaderRoute: typeof AuthLayoutSignUpIndexRouteImport
+      parentRoute: typeof AuthLayoutRouteRoute
+    }
+    '/_authLayout/reset-password/': {
+      id: '/_authLayout/reset-password/'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof AuthLayoutResetPasswordIndexRouteImport
       parentRoute: typeof AuthLayoutRouteRoute
     }
     '/_authLayout/login/': {
@@ -233,12 +343,14 @@ declare module '@tanstack/react-router' {
 interface AuthLayoutRouteRouteChildren {
   AuthLayoutForgotPasswordIndexRoute: typeof AuthLayoutForgotPasswordIndexRoute
   AuthLayoutLoginIndexRoute: typeof AuthLayoutLoginIndexRoute
+  AuthLayoutResetPasswordIndexRoute: typeof AuthLayoutResetPasswordIndexRoute
   AuthLayoutSignUpIndexRoute: typeof AuthLayoutSignUpIndexRoute
 }
 
 const AuthLayoutRouteRouteChildren: AuthLayoutRouteRouteChildren = {
   AuthLayoutForgotPasswordIndexRoute: AuthLayoutForgotPasswordIndexRoute,
   AuthLayoutLoginIndexRoute: AuthLayoutLoginIndexRoute,
+  AuthLayoutResetPasswordIndexRoute: AuthLayoutResetPasswordIndexRoute,
   AuthLayoutSignUpIndexRoute: AuthLayoutSignUpIndexRoute,
 }
 
@@ -246,9 +358,29 @@ const AuthLayoutRouteRouteWithChildren = AuthLayoutRouteRoute._addFileChildren(
   AuthLayoutRouteRouteChildren,
 )
 
+interface ProtectedRouteRouteChildren {
+  ProtectedAccountIndexRoute: typeof ProtectedAccountIndexRoute
+  ProtectedAccountsIndexRoute: typeof ProtectedAccountsIndexRoute
+  ProtectedDangerIndexRoute: typeof ProtectedDangerIndexRoute
+  ProtectedSecurityIndexRoute: typeof ProtectedSecurityIndexRoute
+  ProtectedSessionsIndexRoute: typeof ProtectedSessionsIndexRoute
+}
+
+const ProtectedRouteRouteChildren: ProtectedRouteRouteChildren = {
+  ProtectedAccountIndexRoute: ProtectedAccountIndexRoute,
+  ProtectedAccountsIndexRoute: ProtectedAccountsIndexRoute,
+  ProtectedDangerIndexRoute: ProtectedDangerIndexRoute,
+  ProtectedSecurityIndexRoute: ProtectedSecurityIndexRoute,
+  ProtectedSessionsIndexRoute: ProtectedSessionsIndexRoute,
+}
+
+const ProtectedRouteRouteWithChildren = ProtectedRouteRoute._addFileChildren(
+  ProtectedRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   AuthLayoutRouteRoute: AuthLayoutRouteRouteWithChildren,
+  ProtectedRouteRoute: ProtectedRouteRouteWithChildren,
   ApiSendPasswordResetEmailRouteRoute: ApiSendPasswordResetEmailRouteRoute,
   ApiSendVerificationEmailRouteRoute: ApiSendVerificationEmailRouteRoute,
   PrivacyIndexRoute: PrivacyIndexRoute,
