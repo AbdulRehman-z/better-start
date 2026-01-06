@@ -43,7 +43,7 @@ Have an idea? Open an issue with:
 
 #### Making Changes
 1. Write clean, readable code
-2. Follow the existing code style (I use Biome)
+2. Follow the existing code style (We use Biome)
 3. Test your changes locally:
    ```bash
    bun run dev
@@ -65,9 +65,9 @@ Have an idea? Open an issue with:
    - Link to related issues if any (e.g., "Closes #123")
    - Screenshots (optional but recommended) if UI changes are involved
 
-3. **Wait for review** - I'll review your PR as soon as possible
+3. **Wait for review** - We'll review your PR as soon as possible
 4. **Make requested changes** if needed
-5. Once approved, I'll merge your PR!
+5. Once approved, we'll merge your PR!
 
 ## ✅ Pull Request Checklist
 
@@ -94,11 +94,11 @@ Example: `feat: add password reset functionality`
 
 ## 🔍 Review Process
 
-1. **I review all PRs** - Usually within 2-3 days
-2. **Feedback given** - I'll suggest changes or approve
+1. **We review all PRs** - Usually within 2-3 days
+2. **Feedback given** - We'll suggest changes or approve
 3. **You make updates** - Address any requested changes
 4. **Final approval** - Once everything looks good
-5. **Merge** - I'll merge your contribution!
+5. **Merge** - We'll merge your contribution!
 
 ## 💡 Development Tips
 
@@ -110,6 +110,10 @@ Example: `feat: add password reset functionality`
 ## 🤝 Code of Conduct
 
 Please be respectful and inclusive. See our [Code of Conduct](CODE_OF_CONDUCT.md) for details.
+
+## 🌟 Good First Issues
+
+New to the project? specific tasks are marked with the label `good first issue` in the [issues tab](https://github.com/your-username/start-on-steroids/issues). These are great starting points!
 
 ## ❓ Need Help?
 

@@ -29,3 +29,7 @@ Community leaders will take action that is appropriate for the situation, which 
 
 ## Attribution
 This Code of Conduct is adapted from the [Contributor Covenant](https://www.contributor-covenant.org), version 2.0.
+
+## Contact Info
+
+Please report any concerns to [abdulrehmandotgo@gmail.com].

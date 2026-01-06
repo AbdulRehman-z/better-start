@@ -1,6 +1,6 @@
 # Start on Steroids 🚀
 
-> A high-performance, batter-included starter template for modern web applications.
+> A high-performance, batteries-included starter template for modern web applications.
 
 **Start on Steroids** is a comprehensive boilerplate built to accelerate your development workflow. It combines the power of [TanStack Start](https://tanstack.com/start) with a robust backend and a beautiful, modern UI system. Designed for scalability, performance, and developer experience.
 
