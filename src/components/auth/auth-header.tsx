@@ -1,5 +1,5 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { GalleryVerticalEnd } from "lucide-react";
+import { Image } from "@unpic/react";
 import { buttonVariants } from "../ui/button";
 
 export const Header = () => {
@@ -12,8 +12,8 @@ export const Header = () => {
 	return (
 		<div className="flex justify-between items-center">
 			<Link to="/sign-up" className="flex items-center gap-2 font-medium">
-				<div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
-					<GalleryVerticalEnd className="size-4" />
+				<div className="text-primary-foreground flex size-6 items-center justify-center rounded-md">
+					<Image src="/logo.svg" height={16} width={16} alt="flowcat-logo" />
 				</div>
 				Flowcat Inc.
 			</Link>
@@ -23,7 +23,12 @@ export const Header = () => {
 					<Link className={buttonVariants({ variant: "outline" })} to="/login">
 						Login
 					</Link>
-					<Link className={buttonVariants({})} to="/sign-up">
+					<Link
+						className={buttonVariants({
+							variant: "default",
+						})}
+						to="/sign-up"
+					>
 						Sign Up
 					</Link>
 				</div>

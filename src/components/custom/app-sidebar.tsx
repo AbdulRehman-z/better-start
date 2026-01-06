@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { BoxIcon } from "lucide-react";
+import { Image } from "@unpic/react";
 import { menuItems } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import {
@@ -22,7 +22,13 @@ export const AppSidebar = () => {
 			<div className="px-2 pt-5 pb-2 flex flex-col justify-between gap-y-3 flex-1">
 				<SidebarHeader className="tracking-tighter uppercase font-bold">
 					<Link to="/profile" className="flex items-center gap-2">
-						<BoxIcon className="size-5" />
+						<Image
+							src="/logo.svg"
+							height={16}
+							width={16}
+							alt="flowcat-logo"
+							className="text-primary"
+						/>
 						<span>Flowcat Inc.</span>
 					</Link>
 				</SidebarHeader>
