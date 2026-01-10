@@ -26,6 +26,7 @@ import { Route as AuthLayoutSignUpIndexRouteImport } from './routes/_authLayout/
 import { Route as AuthLayoutResetPasswordIndexRouteImport } from './routes/_authLayout/reset-password/index'
 import { Route as AuthLayoutLoginIndexRouteImport } from './routes/_authLayout/login/index'
 import { Route as AuthLayoutForgotPasswordIndexRouteImport } from './routes/_authLayout/forgot-password/index'
+import { Route as AuthLayout2FaIndexRouteImport } from './routes/_authLayout/2-fa/index'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
 const ProtectedRouteRoute = ProtectedRouteRouteImport.update({
@@ -116,6 +117,11 @@ const AuthLayoutForgotPasswordIndexRoute =
     path: '/forgot-password/',
     getParentRoute: () => AuthLayoutRouteRoute,
   } as any)
+const AuthLayout2FaIndexRoute = AuthLayout2FaIndexRouteImport.update({
+  id: '/2-fa/',
+  path: '/2-fa/',
+  getParentRoute: () => AuthLayoutRouteRoute,
+} as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -131,6 +137,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyIndexRoute
   '/terms': typeof TermsIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/2-fa': typeof AuthLayout2FaIndexRoute
   '/forgot-password': typeof AuthLayoutForgotPasswordIndexRoute
   '/login': typeof AuthLayoutLoginIndexRoute
   '/reset-password': typeof AuthLayoutResetPasswordIndexRoute
@@ -149,6 +156,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyIndexRoute
   '/terms': typeof TermsIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/2-fa': typeof AuthLayout2FaIndexRoute
   '/forgot-password': typeof AuthLayoutForgotPasswordIndexRoute
   '/login': typeof AuthLayoutLoginIndexRoute
   '/reset-password': typeof AuthLayoutResetPasswordIndexRoute
@@ -170,6 +178,7 @@ export interface FileRoutesById {
   '/privacy/': typeof PrivacyIndexRoute
   '/terms/': typeof TermsIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/_authLayout/2-fa/': typeof AuthLayout2FaIndexRoute
   '/_authLayout/forgot-password/': typeof AuthLayoutForgotPasswordIndexRoute
   '/_authLayout/login/': typeof AuthLayoutLoginIndexRoute
   '/_authLayout/reset-password/': typeof AuthLayoutResetPasswordIndexRoute
@@ -190,6 +199,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms'
     | '/api/auth/$'
+    | '/2-fa'
     | '/forgot-password'
     | '/login'
     | '/reset-password'
@@ -208,6 +218,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms'
     | '/api/auth/$'
+    | '/2-fa'
     | '/forgot-password'
     | '/login'
     | '/reset-password'
@@ -228,6 +239,7 @@ export interface FileRouteTypes {
     | '/privacy/'
     | '/terms/'
     | '/api/auth/$'
+    | '/_authLayout/2-fa/'
     | '/_authLayout/forgot-password/'
     | '/_authLayout/login/'
     | '/_authLayout/reset-password/'
@@ -371,6 +383,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLayoutForgotPasswordIndexRouteImport
       parentRoute: typeof AuthLayoutRouteRoute
     }
+    '/_authLayout/2-fa/': {
+      id: '/_authLayout/2-fa/'
+      path: '/2-fa'
+      fullPath: '/2-fa'
+      preLoaderRoute: typeof AuthLayout2FaIndexRouteImport
+      parentRoute: typeof AuthLayoutRouteRoute
+    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
@@ -382,6 +401,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthLayoutRouteRouteChildren {
+  AuthLayout2FaIndexRoute: typeof AuthLayout2FaIndexRoute
   AuthLayoutForgotPasswordIndexRoute: typeof AuthLayoutForgotPasswordIndexRoute
   AuthLayoutLoginIndexRoute: typeof AuthLayoutLoginIndexRoute
   AuthLayoutResetPasswordIndexRoute: typeof AuthLayoutResetPasswordIndexRoute
@@ -389,6 +409,7 @@ interface AuthLayoutRouteRouteChildren {
 }
 
 const AuthLayoutRouteRouteChildren: AuthLayoutRouteRouteChildren = {
+  AuthLayout2FaIndexRoute: AuthLayout2FaIndexRoute,
   AuthLayoutForgotPasswordIndexRoute: AuthLayoutForgotPasswordIndexRoute,
   AuthLayoutLoginIndexRoute: AuthLayoutLoginIndexRoute,
   AuthLayoutResetPasswordIndexRoute: AuthLayoutResetPasswordIndexRoute,

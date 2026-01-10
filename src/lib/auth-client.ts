@@ -15,5 +15,12 @@ export const authClient = createAuthClient({
 			}
 		},
 	},
-	plugins: [lastLoginMethodClient(), twoFactorClient()],
+	plugins: [
+		lastLoginMethodClient(),
+		twoFactorClient({
+			onTwoFactorRedirect: () => {
+				window.location.href = "/2-fa";
+			},
+		}),
+	],
 });

@@ -12,9 +12,9 @@ import { Toaster } from "@/components/ui/sonner";
 import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
 import appCss from "../styles.css?url";
 
-interface MyRouterContext {
+type MyRouterContext = {
 	queryClient: QueryClient;
-}
+};
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
 	head: () => ({
@@ -49,13 +49,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body>
-				<ThemeProvider
-					attribute="class"
-					themes={["light"]}
-					defaultTheme="light"
-					enableColorScheme
-					enableSystem
-				>
+				<ThemeProvider defaultTheme="light" enableColorScheme enableSystem>
 					{children}
 				</ThemeProvider>
 				<Toaster />

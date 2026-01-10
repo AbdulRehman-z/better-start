@@ -1,10 +1,19 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { Calendar, Clock, LockKeyhole, Mail, User } from "lucide-react";
+import {
+	Calendar,
+	Clock,
+	HammerIcon,
+	LockKeyhole,
+	Mail,
+	User,
+} from "lucide-react";
 import { useState } from "react";
 import { getUserDetailsFn } from "@/functions/get-user-details-fn";
 import { formatDate } from "@/lib/utils";
 import { ChangeEmailDialog } from "../custom/change-email-dialog";
 import { ChangePasswordDialog } from "../custom/change-password-dialog";
+import { DisableTwoFactorDialog } from "../custom/disable-two-factor-dialog";
+import { EnableTwoFactorDialog } from "../custom/enable-two-factor-dialog";
 import { UpdateProfileDialog } from "../custom/update-profile-dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Badge } from "../ui/badge";
@@ -21,6 +30,8 @@ export const ProfileDetailsContainer = () => {
 	const [updateProfileOpen, onUpdateProfileOpenChange] = useState(false);
 	const [emailOpen, onEmailOpenChange] = useState(false);
 	const [passwordOpen, onPasswordOpenChange] = useState(false);
+	const [enable2FAOpen, setEnable2FAOpen] = useState(false);
+	const [disable2FAOpen, setDisable2FAOpen] = useState(false);
 	const {
 		data: user,
 		error,
@@ -59,7 +70,7 @@ export const ProfileDetailsContainer = () => {
 			<Card className="bg-transparent border border-dashed">
 				<CardContent className="pt-6">
 					<div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-						<Avatar className="size-24 border-4 border-background shadow-lg">
+						<Avatar className="size-24 border-4 border-background">
 							<AvatarImage src={user.image ?? ""} alt={user.name} />
 							<AvatarFallback className="text-2xl font-semibold">
 								{getInitials(user.name)}
@@ -83,10 +94,7 @@ export const ProfileDetailsContainer = () => {
 									open={updateProfileOpen}
 									onOpenChange={onUpdateProfileOpenChange}
 								/>
-								<Button
-									onClick={() => onUpdateProfileOpenChange(true)}
-									className="gap-2"
-								>
+								<Button onClick={() => onUpdateProfileOpenChange(true)}>
 									<User className="size-4" />
 									Edit Profile
 								</Button>
@@ -99,7 +107,6 @@ export const ProfileDetailsContainer = () => {
 								<Button
 									variant="outline"
 									onClick={() => onEmailOpenChange(true)}
-									className="gap-2"
 								>
 									<Mail className="size-4" />
 									Change Email
@@ -113,11 +120,32 @@ export const ProfileDetailsContainer = () => {
 								<Button
 									variant="outline"
 									onClick={() => onPasswordOpenChange(true)}
-									className="gap-2"
 								>
 									<LockKeyhole className="size-4" />
 									Change Password
 								</Button>
+
+								{/* TwoFactorDialog */}
+								<Button
+									variant="outline"
+									onClick={() =>
+										user.twoFactorEnabled
+											? setDisable2FAOpen(true)
+											: setEnable2FAOpen(true)
+									}
+								>
+									<HammerIcon className="size-4" />
+									{user.twoFactorEnabled ? "Disable 2-FA" : "Enable 2-FA"}
+								</Button>
+
+								<EnableTwoFactorDialog
+									open={enable2FAOpen}
+									onOpenChange={setEnable2FAOpen}
+								/>
+								<DisableTwoFactorDialog
+									open={disable2FAOpen}
+									onOpenChange={setDisable2FAOpen}
+								/>
 							</div>
 						</div>
 					</div>

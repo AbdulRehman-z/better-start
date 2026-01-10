@@ -24,6 +24,9 @@
   "linter": {
     "enabled": true,
     "rules": {
+      "suspicious": {
+        "noArrayIndexKey": "off"
+      },
       "correctness": {
         "noChildrenProp": "off",
         "useUniqueElementIds": "off"

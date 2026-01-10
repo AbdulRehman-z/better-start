@@ -9,9 +9,9 @@ type Props = {
 
 export const FormWrapper = ({ title, children, className }: Props) => {
 	return (
-		<div className="flex flex-col gap-y-1 min-w-md">
+		<div className="flex flex-col relative min-w-lg">
 			{title && (
-				<span className="text-muted-foreground text-sm font-light">
+				<span className="absolute text-yellow-600 -top-8 left-0 text-sm font-light">
 					{title}
 				</span>
 			)}

@@ -3,11 +3,11 @@ import { Image } from "@unpic/react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
+import type { AllRoutes } from "@/lib/types";
 import { Badge } from "../ui/badge";
 import { Spinner } from "../ui/spinner";
 
 export type SupportedSocialProvider = "github" | "google";
-type AllRoutes = LinkProps<RegisteredRouter>["to"];
 
 type SocialAuthButtonsProps = {
 	// Whether buttons should be disabled (e.g., during form submission)
@@ -26,19 +26,19 @@ export type ProviderConfig = {
 };
 
 export const PROVIDERS_CONFIG: Record<SupportedSocialProvider, ProviderConfig> =
-{
-	google: {
-		label: "Google",
-		icon: "/google.svg",
-		description:
-			"Connect to your Google account for easy sign-in and email integration.",
-	},
-	github: {
-		label: "GitHub",
-		icon: "/github.svg",
-		description: "Connect to your GitHub account.",
-	},
-};
+	{
+		google: {
+			label: "Google",
+			icon: "/google.svg",
+			description:
+				"Connect to your Google account for easy sign-in and email integration.",
+		},
+		github: {
+			label: "GitHub",
+			icon: "/github.svg",
+			description: "Connect to your GitHub account.",
+		},
+	};
 
 export const SocialAuthButtons = ({
 	disabled = false,

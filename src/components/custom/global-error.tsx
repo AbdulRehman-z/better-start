@@ -2,12 +2,12 @@ import { AlertCircleIcon } from "lucide-react";
 import type { FC } from "react";
 import { Button } from "../ui/button";
 
-interface GlobalErrorProps {
+type GlobalErrorProps = {
 	error?: Error & { digest?: string };
 	onRetry?: () => void;
 	title?: string;
 	message?: string;
-}
+};
 
 const GlobalError: FC<GlobalErrorProps> = ({
 	error,

@@ -3,6 +3,7 @@ import { Header } from "@/components/auth/auth-header";
 import { TermsOfService } from "@/components/auth/terms-of-service";
 import { Testimonial } from "@/components/auth/testimonial";
 import { requireNoAuthMiddleware } from "@/lib/middlewares";
+import type { AllRoutes } from "@/lib/types";
 
 export const Route = createFileRoute("/_authLayout")({
 	server: {
@@ -14,10 +15,13 @@ export const Route = createFileRoute("/_authLayout")({
 function RouteComponent() {
 	const location = useLocation();
 	const currentPath = location.pathname;
-
 	// Paths where we don't want to show terms of service
-	const hideTermsOnPaths = ["/reset-password", "/forgot-password"];
-	const shouldShowTerms = !hideTermsOnPaths.includes(currentPath);
+	const hideTermsOnPaths = [
+		"/reset-password",
+		"/forgot-password",
+		"/2-fa",
+	] as AllRoutes[];
+	const shouldShowTerms = !hideTermsOnPaths.includes(currentPath as AllRoutes);
 
 	return (
 		<div className="grid min-h-svh lg:grid-cols-3">

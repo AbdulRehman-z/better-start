@@ -1,5 +1,10 @@
 import { useForm } from "@tanstack/react-form";
-import { Link, useNavigate } from "@tanstack/react-router";
+import {
+	Link,
+	useNavigate,
+	useRouteContext,
+	useSearch,
+} from "@tanstack/react-router";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -22,12 +27,9 @@ import {
 } from "../ui/field";
 import { PasswordInput } from "../ui/password-input";
 
-type Props = {
-	token: string;
-};
-
-export const ResetPasswordForm = ({ token }: Props) => {
+export const ResetPasswordForm = () => {
 	const navigate = useNavigate();
+	const { token } = useSearch({ from: "/_authLayout/reset-password/" });
 
 	const form = useForm({
 		defaultValues: {

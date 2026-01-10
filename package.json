@@ -54,6 +54,7 @@
     "react-day-picker": "^9.13.0",
     "react-dom": "^19.2.3",
     "react-dropzone": "^14.3.8",
+    "react-qr-code": "^2.0.18",
     "react-resizable-panels": "^4.0.16",
     "recharts": "2.15.4",
     "resend": "^6.6.0",

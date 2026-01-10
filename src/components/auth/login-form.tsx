@@ -50,8 +50,12 @@ export const LoginForm = () => {
 					password: value.password,
 				},
 				{
-					onSuccess: () => {
-						navigate({ to: "/profile" });
+					onSuccess: (context) => {
+						if (context.data.twoFactorRedirect) {
+							navigate({ to: "/2-fa" });
+						} else {
+							navigate({ to: "/profile" });
+						}
 					},
 					onError: (ctx) => {
 						if (ctx.error.code === "EMAIL_NOT_VERIFIED") {
